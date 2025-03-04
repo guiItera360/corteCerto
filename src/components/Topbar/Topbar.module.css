@@ -1,0 +1,43 @@
+.topbar_conteudo {
+    background-color: #f1f1f1;
+
+    position: fixed;
+    top: 0;
+    bottom: 0;
+
+    width: calc(100% - 230px);
+    height: 10vh;
+
+
+    display: flex;  /* Alinha o conteúdo horizontalmente */
+    justify-content: flex-end; /* Alinha o conteúdo a direita */
+
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.445);
+}
+
+@media (max-width: 700px){
+    .topbar_conteudo {
+        width: calc(100% - 160px);
+    }
+}
+
+@media (max-width: 500px){
+    .topbar_conteudo {
+        width: 100%;
+    }
+}
+
+.pagina_conteudo {
+    margin-top: 10vh;
+}
+
+.botao_deslogar {
+    text-decoration: none;
+    color: #070b3b;
+    font-size: 3.5vh;
+
+    display: flex;
+    align-items: center;
+    
+    margin-right: 20px;
+}

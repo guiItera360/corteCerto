@@ -1,0 +1,46 @@
+.sidebar_conteudo {
+    background-color: #070b3b;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 230px;
+    height: 100%;  
+}
+
+.pagina_conteudo {
+    margin-left: 230px;
+}
+
+@media (max-width: 700px){
+    .sidebar_conteudo {
+        width: 160px;
+    }
+
+    .pagina_conteudo {
+        margin-left: 160px;
+    }
+}
+
+@media (max-width: 500px){
+    .sidebar_conteudo {
+        display: none;
+    }
+
+    .pagina_conteudo {
+        margin-left: 0;
+    }
+}
+
+.sidebar_header {
+
+    & .logo {
+        width: 80%;
+        margin: 10%;
+    }
+
+    & .linha {
+        color: rgba(250, 234, 214, 0.4);
+    }
+
+    overflow-x: hidden;
+}
