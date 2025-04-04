@@ -1,43 +1,71 @@
-.topbar_conteudo {
-    background-color: #f1f1f1;
+.topbar {
+  position: fixed;
 
-    position: fixed;
-    top: 0;
-    bottom: 0;
-
-    width: calc(100% - 230px);
-    height: 10vh;
-
-
-    display: flex;  /* Alinha o conteúdo horizontalmente */
-    justify-content: flex-end; /* Alinha o conteúdo a direita */
-
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.445);
+  top: 0;
+  right: 20px;
+  height: 50px;
+  
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: calc(100% - 60px); /* Ajuste para sidebar */
+  padding: 10px;
 }
 
 @media (max-width: 700px){
-    .topbar_conteudo {
-        width: calc(100% - 160px);
-    }
+  .topbar_conteudo {
+      width: calc(100% - 160px);
+  }
 }
 
-@media (max-width: 500px){
-    .topbar_conteudo {
-        width: 100%;
-    }
+.logoutButton {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  color: black;
+  cursor: pointer;
+  font-size: 24px;
+  transition: color 0.3s;
 }
 
-.pagina_conteudo {
-    margin-top: 10vh;
+.logoutButton:hover {
+  color: red;
 }
 
-.botao_deslogar {
-    text-decoration: none;
-    color: #070b3b;
-    font-size: 3.5vh;
-
-    display: flex;
-    align-items: center;
-    
-    margin-right: 20px;
+.pageContent {
+  margin-top: 50px;
 }
+
+.themeToggle {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-color);
+  transition: color 0.3s ease-in-out;
+  font-size: 20px;
+  margin-right: 2rem;
+}
+
+.themeToggle:hover {
+  color: var(--primary-color);
+}
+
+/* Adiciona transição suave no botão de logout */
+.logoutButton {
+  color: var(--text-color);
+  transition: color 0.3s ease-in-out;
+}
+
+/* Garante que o botão de logout fique visível no modo escuro */
+[data-theme="dark"] .logoutButton {
+  color: white;
+
+  &:hover{
+    color: red;
+  }
+}
+
+

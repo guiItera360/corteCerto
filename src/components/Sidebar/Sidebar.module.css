@@ -1,46 +1,116 @@
-.sidebar_conteudo {
-    background-color: #070b3b;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 230px;
-    height: 100%;  
+.container {
+  display: flex;
 }
 
-.pagina_conteudo {
-    margin-left: 230px;
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 60px;
+  background-color: #1d2330;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  transition: width 0.3s ease-in-out;
+  z-index: 1000;
+  border-right: 1px solid rgba(250, 234, 214, 0.4)
 }
 
-@media (max-width: 700px){
-    .sidebar_conteudo {
-        width: 160px;
-    }
-
-    .pagina_conteudo {
-        margin-left: 160px;
-    }
+.sidebar.expanded {
+  width: 200px;
 }
 
-@media (max-width: 500px){
-    .sidebar_conteudo {
-        display: none;
-    }
-
-    .pagina_conteudo {
-        margin-left: 0;
-    }
+/* Header com botão, título e logo */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 10px;
 }
 
-.sidebar_header {
-
-    & .logo {
-        width: 80%;
-        margin: 10%;
-    }
-
-    & .linha {
-        color: rgba(250, 234, 214, 0.4);
-    }
-
-    overflow-x: hidden;
+/* Animação do título e logo */
+.title {
+  flex: 1;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  opacity: 0;
+  transition: opacity 0.1s ease-in-out;
 }
+
+.logo {
+  width: 40px;
+  height: auto;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.sidebar.expanded .title,
+.sidebar.expanded .logo {
+  opacity: 1;
+}
+
+.menuButton {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.paginaConteudo {
+  margin-left: 0.1rem;
+  transition: margin-left 0.3s ease-in-out;
+  width: calc(100% - 60px);
+  padding: 20px;
+}
+
+.paginaConteudo.expandedContent {
+  margin-left: 8rem;
+  width: calc(100% - 200px);
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.linha {
+  width: 450rem;
+  height: 1rem;
+  opacity: 2;
+  color: rgba(250, 234, 214, 0.4);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.logo {
+  width: 40px;
+  height: auto;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.sidebar.expanded .title,
+.sidebar.expanded .logo {
+  opacity: 1;
+}
+
+/* Efeito hover para destacar o link */
+.brand:hover .title {
+  color: #ffcc00;
+}
+

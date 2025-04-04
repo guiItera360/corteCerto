@@ -1,0 +1,39 @@
+.layout {
+    display: flex; /* Faz os elementos ficarem lado a lado */
+    height: 100vh; /* Garante que ocupe toda a tela */
+  }
+  
+  .calendar_component {
+    margin-left: 2rem;
+    margin-top: 4rem ;
+    flex-grow: 1; /* Faz o calendário ocupar todo o espaço restante */
+    padding: 20px; /* Opcional, para afastar da sidebar */
+    overflow: hidden; /* Evita que o calendário estoure os limites */
+  }
+
+  :root {
+    --background-color: #ffffff;
+    --text-color: #000000;
+    --primary-color: #1c1f26;
+}
+
+[data-theme="dark"] {
+    --background-color: #121212;
+    --text-color: #ffffff;
+    --primary-color: #3a3f47;
+}
+
+/* Garante que todos os elementos respeitem o tema */
+.layout, .mainContent, .pagina_conteudo {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.tabela_corpo svg, .botao_editar svg, .botao_deletar svg {
+    color: var(--text-color);
+}
+
+/* Ajuste para botões */
+.modal_button_salvar, .botao_novo {
+    background-color: var(--primary-color);
+}

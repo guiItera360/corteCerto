@@ -1,0 +1,158 @@
+.layout {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+.title{
+    margin-top: 1.3rem;
+}
+
+.mainContent {
+    flex: 1;
+    margin-left: 60px;
+    transition: margin-left 0.3s ease-in-out;
+    padding: 20px;
+    width: calc(100% - 60px);
+    width: 100%;
+    height: 100%;
+}
+
+.mainContent.expanded {
+    margin-left: 200px;
+    width: calc(100% - 200px);
+}
+
+.pagina_conteudo {
+    width: 100%;
+    height: 100%;
+
+    padding: 50px;
+}
+
+.tabela {
+    margin-top: 30px;
+}
+
+.tabela_corpo svg {
+    color: #212529;
+
+    margin-top: 5px;
+    font-size: 25px;
+    height: 100%;
+    width: 100%;
+}
+
+.botao_novo {
+    margin-top: 1.4rem;
+}
+
+.botao_editar {
+    border: none;
+    background: none;
+
+    & svg:hover {
+        color: #0f41e4;
+    }
+
+}
+.botao_deletar {
+    border: none;
+    background: none;
+
+    & svg:hover {
+        color: #e4504b;
+    }
+}
+
+.pagina_cabecalho {
+    border-radius: 8px;
+
+    margin-top: 3rem;
+    display: flex;
+    justify-content: space-between;
+
+    & .botao_novo {
+        margin-right: 5rem;
+        text-decoration: none;
+
+        color: white;
+
+        padding: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+
+        border-radius: 10px;
+        background-color: #1c1f26;
+    }
+}
+
+
+.modal_custom {
+    display: flex;
+}
+
+.modal_body_custom {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.modal_itens {
+    margin-bottom: 20px;
+}
+
+.modal_button_salvar {
+    background-color: #1c1f26;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.modal_button_cancelar {
+    background-color: white;
+    color: #1c1f26;
+    border: 1px solid #1c1f26;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.button_excluir {
+    background-color: #464343;
+    color: white;
+    border: none;
+    padding: 11px 20px;
+    border-radius: 5px;
+
+    &:hover {
+        background-color: #e4504b;
+    }
+}
+
+:root {
+    --background-color: #ffffff;
+    --text-color: #000000;
+    --primary-color: #1c1f26;
+}
+
+[data-theme="dark"] {
+    --background-color: #121212;
+    --text-color: #ffffff;
+    --primary-color: #3a3f47;
+}
+
+/* Garante que todos os elementos respeitem o tema */
+.layout, .mainContent, .pagina_conteudo {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.tabela_corpo svg, .botao_editar svg, .botao_deletar svg {
+    color: var(--text-color);
+}
+
+/* Ajuste para botões */
+.modal_button_salvar, .botao_novo {
+    background-color: var(--primary-color);
+}

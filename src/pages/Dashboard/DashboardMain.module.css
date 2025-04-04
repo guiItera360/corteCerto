@@ -1,0 +1,27 @@
+.dashboard_container {
+    padding: 20px;
+    color: white;
+  }
+  
+  .dashboard_title {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .admin {
+    color: #007bff;
+  }
+  
+  .subtitle {
+    font-size: 14px;
+    margin-bottom: 20px;
+    color: #aaa;
+  }
+  
+  .cards_container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  

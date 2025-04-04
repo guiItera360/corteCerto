@@ -1,22 +1,23 @@
-.sidebar_item {
-    text-decoration: none;
-
+.sidebarItem {
     display: flex;
-    margin: 20px;
-
-    color: #939393;
-
-    & svg {
-        width: 30px;
-        height: 44px;
-    }
-
-    & .texto_link {
-        margin: 10px;
-        font-size: 20px;
-    }
-
-    &:hover {
-        color: #061f61;
-    }
-}
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    gap: 10px;
+    width: 100%;
+    transition: background 0.3s;
+  }
+  
+  .sidebarItem:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  .icon {
+    font-size: 24px;
+  }
+  
+  .text {
+    white-space: nowrap;
+  }
+  

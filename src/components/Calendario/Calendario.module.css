@@ -1,0 +1,100 @@
+/* Estilização aprimorada do Calendário */
+.calendar_body {
+    display: flex;
+    height: 85vh;
+    background-color: #1e1e1e;
+    color: #cecece;
+    border-radius: 15px
+}
+
+.calendario {
+    flex: 5;
+    background-color: #262626;
+    padding: 10px;
+    border-left: 1px solid #444;
+    height: 85vh !important;
+    border-radius: 15px;
+}
+
+.toolbar {
+    border-radius: 10px;
+    width: 20%;
+    background-color: #3174ad;
+    color: #ffffff;
+    padding: 2rem;
+    font-weight: bold;
+    border-right: 1px solid #444;
+    display: flex;
+    flex-direction: column;
+    font-size: 25px;
+}
+
+.rbc-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background: #1a1a1a;
+    border-bottom: 2px solid #444;
+}
+
+.rbc-toolbar button {
+    background-color: #333;
+    color: #cecece;
+    border: 1px solid #555;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.rbc-toolbar button:hover {
+    background-color: #555;
+    border-color: #777;
+}
+
+.rbc-toolbar button:active,
+.rbc-toolbar button.rbc-active {
+    background-color: #777;
+    border-color: #aaa;
+}
+
+/* Calendário - Diferenciar eventos por status */
+.rbc-event {
+    border-radius: 5px;
+    font-size: 14px;
+    padding: 4px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .calendar_body {
+        flex-direction: column;
+    }
+
+    .toolbar {
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 10px;
+    }
+
+    .calendario {
+        width: 100%;
+    }
+}
+
+/* Adiciona transição suave no botão de logout */
+.logoutButton {
+    color: var(--text-color);
+    transition: color 0.3s ease-in-out;
+  }
+  
+  /* Garante que o botão de logout fique visível no modo escuro */
+  [data-theme="dark"] .logoutButton {
+    color: white;
+  }
+  

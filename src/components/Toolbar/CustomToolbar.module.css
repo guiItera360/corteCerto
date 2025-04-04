@@ -1,0 +1,21 @@
+.toolbar_container{
+    display: flex !important;
+    height: 10vh !important;
+    align-items: center !important;
+    padding-left: 50px !important;
+}
+
+.mesAno{
+    width: 50% !important;
+    color: #f3f3f3 !important;
+    justify-content: flex-start !important;
+}
+
+.dirtop{
+    width: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    color: #f3f3f3 !important;
+    justify-content: end !important;
+    padding-right: 50px;
+}

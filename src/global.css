@@ -1,0 +1,150 @@
+Calendario
+/* Header e Botões */
+
+.rbc-toolbar{
+    height: 10vh;
+    color: #bbb;
+    font-size: 25px;
+    font-weight: bold;
+    padding: 5px !important;
+}
+
+.rbc-btn-group > button{
+    border: 0 !important;
+}
+
+.rbc-toolbar button {
+    color: #cecece !important;
+    border: 1px solid #cccccc4f !important;
+}
+
+
+.rbc-toolbar button:active,
+.rbc-toolbar button.rbc-active{
+    background-color: #56565686 !important;
+    border-color: #bbb important;
+}
+
+/* Corpo do Calendario */
+/* Linhas */
+.rbc-month-view{
+    border-color: #eeeeee5f !important;
+}
+
+.rbc-month-row+ .rbc-month-row{
+    border-color: #dddddd73 !important;
+}
+
+.rbc-day-bg+ .rbc-day-bg {
+    border-color: #dddddd73 !important;
+}
+
+/* Mês */
+.rbc-header {
+    color: #eeeeee !important;
+    border-color: #dddddd73 !important;
+}
+
+.rbc-header + .rbc-header{
+    border-top: 0px !important;
+    border-left: 0px !important;
+    border-right: 0px !important;
+    border-color: #dddddd73;
+}
+
+.rbc-off-range-bg{
+    background-color: #313131 !important;
+}
+
+.rbc-today{
+    background-color: #1a1a1a !important;
+}
+
+.rbc-button-link{
+    margin: 5px !important;
+    font-size: 15px !important;
+    color: #eeeeeec5 !important;
+}
+
+.rbc-off-range .rbc-button-link{
+    color: #eeeeee37 !important;
+}
+
+.rbc-now .rbc-button-link{
+    background-color: #f15550;
+    color: #ffffff !important;
+    border-radius: 5px;
+    padding-left: 2px;
+    padding-right: 2px;
+    margin: 5px 0 0 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.rbc-time-content, .rbc-time-content > .rbc-day-slot, .rbc-timeslot-group, .rbc-time-slot{
+    border-color: #b0b0b0 !important;
+    color: #bbb !important;
+}
+
+.rbc-day-slot, .rbc-time-slot{
+    border-top: 1px solid #c8c8c80a !important;
+}
+
+
+/* Agenda */
+.rbc-agenda-content, .rbc-agenda-view{
+    color: #aaa !important;
+}
+
+.rbc-agenda-date-cell, .rbc-agenda-time-cell{
+    border-color: #262626 !important;
+}
+
+.rbc-agenda-event-cell{
+    border-radius: 10px !important;
+
+}
+
+
+/* Eventos - Sobrescrevendo o padrão do react-big-calendar */
+.rbc-event.eventoPendente {
+    background-color: #f7da9c !important;
+    color: black !important;
+    border-radius: 5px !important;
+    border: none !important;
+}
+
+.rbc-event.eventoConfirmado {
+    background-color: #4cafa7 !important;
+    color: white !important;
+    border-radius: 5px !important;
+    border: none !important;
+}
+
+.rbc-event.eventoCancelado {
+    background-color: #ec685e !important;
+    color: white !important;
+    border-radius: 5px !important;
+    border: none !important;
+}
+
+.rbc-event.eventoRealizado {
+    background-color: #8bc34a !important; 
+    color: white !important;
+    border-radius: 5px !important;
+    border: none !important;
+}
+
+.table {
+    --bs-table-bg: var(--background-color) !important; /* Fundo seguindo o tema */
+    --bs-table-color: var(--text-color) !important; /* Cor do texto conforme o tema */
+    --bs-table-border-color: rgba(0, 0, 0, 0.1) !important; /* Linhas mais suaves */
+    --bs-table-striped-bg: rgba(0, 0, 0, 0.03) !important; /* Alternância mais discreta */
+}
+
+/* Ajustes para o modo dark */
+[data-theme="dark"] .table {
+    --bs-table-border-color: rgba(255, 255, 255, 0.2) !important;
+    --bs-table-striped-bg: rgba(255, 255, 255, 0.05) !important;
+}
+
