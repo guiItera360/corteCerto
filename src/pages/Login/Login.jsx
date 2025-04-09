@@ -2,15 +2,31 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { User, Lock } from 'lucide-react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import UsuarioApi from "../../services/usuarioAPI";
 
 export function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate('/usuarios');
+
+    try {
+      const token = await UsuarioApi.loginAsync(username, password);
+
+      localStorage.setItem("token", token);
+
+      toast.success("Login efetuado com sucesso...");
+
+      setTimeout(() => {
+        navigate("/home");
+      }, 1000);
+    } catch (error) {
+      toast.error("Login e senha incorretos!");
+    }
   };
 
   return (
@@ -35,10 +51,9 @@ export function Login() {
                     </span>
                     <Form.Control
                       type="text"
-                      placeholder="Usuário"
+                      placeholder="Digite seu Login..."
                       value={username}
                       onChange={(e) => setUsername(e.target.value)}
-                      className="bg-dark text-light border-secondary"
                     />
                   </div>
                 </Form.Group>
@@ -50,10 +65,9 @@ export function Login() {
                     </span>
                     <Form.Control
                       type="password"
-                      placeholder="Senha"
+                      placeholder="Digite sua Senha..."
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="bg-dark text-light border-secondary"
                     />
                   </div>
                 </Form.Group>

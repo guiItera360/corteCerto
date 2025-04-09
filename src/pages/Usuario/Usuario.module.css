@@ -156,3 +156,13 @@
 .modal_button_salvar, .botao_novo {
     background-color: var(--primary-color);
 }
+
+.icone_recomendar {
+    cursor: pointer;
+    color: #6c757d;
+    transition: color 0.3s ease;
+  }
+  .icone_recomendar:hover {
+    color: #1d2330;
+  }
+  

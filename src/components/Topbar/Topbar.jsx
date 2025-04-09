@@ -1,11 +1,17 @@
 import style from "./Topbar.module.css";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { MdLogout } from "react-icons/md";
 import { useTheme } from "../../ThemeContext";
-import { BsSun, BsMoon } from "react-icons/bs"; // Ícones para alternar temas
+import { BsSun, BsMoon } from "react-icons/bs";
 
 export function Topbar() {
   const { theme, toggleTheme } = useTheme();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token"); // Remove o token
+    navigate("/"); // Redireciona para a página de login
+  };
 
   return (
     <div className={style.topbar}>
@@ -14,9 +20,10 @@ export function Topbar() {
         {theme === "light" ? <BsMoon size={20} /> : <BsSun size={20} />}
       </button>
 
-      <Link to="/" className={style.logoutButton}>
+      {/* Botão de logout */}
+      <button onClick={handleLogout} className={style.logoutButton}>
         <MdLogout size={24} />
-      </Link>
+      </button>
     </div>
   );
 }

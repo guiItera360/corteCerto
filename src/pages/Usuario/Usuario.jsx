@@ -7,18 +7,24 @@ import { Sidebar } from "../../components/Sidebar/Sidebar";
 import UsuarioApi from "../../services/usuarioAPI";
 import style from "./Usuario.module.css";
 import { MdDelete, MdEdit } from "react-icons/md";
+import { FaCut } from "react-icons/fa";
+import { toast, ToastContainer } from "react-toastify";
 
 export function Usuarios() {
   const [usuarios, setUsuarios] = useState([]);
   const [mostrarModalCriar, setMostrarModalCriar] = useState(false);
   const [mostrarModalEditar, setMostrarModalEditar] = useState(false);
   const [mostrarModalExcluir, setMostrarModalExcluir] = useState(false);
+  const [mostrarModalResultado, setMostrarModalResultado] = useState(false);
+  const [resultadoRecomendacao, setResultadoRecomendacao] = useState(null);
   const [usuarioSelecionado, setUsuarioSelecionado] = useState(null);
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [categoria, setCategoria] = useState("");
   const [tiposUsuario, setTiposUsuario] = useState([]);
+  const [mostrarModalRecomendar, setMostrarModalRecomendar] = useState(false);
+  const [usuarioParaRecomendar, setUsuarioParaRecomendar] = useState(null);
 
   useEffect(() => {
     carregarTipos();
@@ -76,7 +82,6 @@ export function Usuarios() {
         usuarioEditado.email,
         usuarioEditado.categoria
       );
-      
 
       setMostrarModalEditar(false);
       setNome("");
@@ -90,13 +95,55 @@ export function Usuarios() {
 
   const handleExcluirUsuario = async () => {
     try {
-      await UsuarioApi.deletarAsync(usuarioSelecionado);
+      await UsuarioApi.deletarAsync(usuarioSelecionado.usuarioId);
       setMostrarModalExcluir(false);
       await carregaUsuarios();
     } catch (error) {
       console.error("Erro ao excluir usuário:", error);
     }
   };
+
+  const selecionarFotoParaRecomendacao = () => {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = "image/*";
+
+    input.onchange = (event) => {
+      const foto = event.target.files[0];
+      if (foto) {
+        handleRecomendacao(foto); // Chama a função principal passando o arquivo
+      }
+    };
+
+    input.click(); // Abre o seletor de arquivo
+  };
+
+  const handleRecomendacao = async (foto) => {
+    if (!foto || !usuarioParaRecomendar) return;
+  
+    try {
+      const resultado = await UsuarioApi.recomendarCorteAsync(
+        foto,
+        usuarioParaRecomendar.nome
+      );
+  
+      toast.success(
+        `Corte recomendado para ${usuarioParaRecomendar.nome}: ${resultado.corte_recomendado}`
+      );
+  
+      // Novo: salva o resultado para exibir no modal
+      setResultadoRecomendacao(resultado);
+      setMostrarModalResultado(true);
+    } catch (error) {
+      toast.error(
+        `Erro ao recomendar corte para ${usuarioParaRecomendar.nome}`
+      );
+    } finally {
+      setMostrarModalRecomendar(false);
+      setUsuarioParaRecomendar(null);
+    }
+  };
+  
 
   return (
     <div className={style.layout}>
@@ -118,6 +165,7 @@ export function Usuarios() {
               <th>Nome</th>
               <th>Categoria</th>
               <th>Ações</th>
+              <th>BarbearIA</th>
             </tr>
           </thead>
           <tbody>
@@ -145,17 +193,103 @@ export function Usuarios() {
                   <button
                     className={style.botao_deletar}
                     onClick={() => {
-                      setUsuarioSelecionado(usuario.usuarioId);
+                      setUsuarioSelecionado(usuario); // <-- objeto inteiro
                       setMostrarModalExcluir(true);
                     }}
                   >
                     <MdDelete />
                   </button>
                 </td>
+                <td>
+                  <td>
+                    <FaCut
+                      size={20}
+                      className={style.icone_recomendar}
+                      title="Recomendar corte"
+                      onClick={() => {
+                        setUsuarioParaRecomendar(usuario);
+                        setMostrarModalRecomendar(true);
+                      }}
+                    />
+                  </td>
+                </td>
               </tr>
             ))}
           </tbody>
         </Table>
+        {/* Modal de Recomendação */}
+        <Modal
+          show={mostrarModalRecomendar}
+          onHide={() => setMostrarModalRecomendar(false)}
+          className={style.modal_custom}
+          centered
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Recomendar Corte</Modal.Title>
+          </Modal.Header>
+
+          <Modal.Body>
+            Deseja recomendar um corte para{" "}
+            <strong>{usuarioParaRecomendar?.nome}</strong>?
+          </Modal.Body>
+
+          <Modal.Footer>
+            <Button
+              variant="secondary"
+              onClick={() => setMostrarModalRecomendar(false)}
+            >
+              Cancelar
+            </Button>
+            <Button variant="primary" onClick={selecionarFotoParaRecomendacao}>
+              Escolher Foto
+            </Button>
+          </Modal.Footer>
+        </Modal>
+          
+        {/* Modal de Recomendação Resposta */}
+        <Modal
+          show={mostrarModalResultado}
+          onHide={() => setMostrarModalResultado(false)}
+          className={style.modal_custom}
+          centered
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>
+              Cortes recomendados para {resultadoRecomendacao?.cliente}
+            </Modal.Title>
+          </Modal.Header>
+
+          <Modal.Body>
+            {resultadoRecomendacao ? (
+              <>
+                <p>
+                  <strong>Formato do rosto:</strong>{" "}
+                  {resultadoRecomendacao.formato_rosto || "Não identificado"}
+                </p>
+                <hr />
+                <p>
+                  <strong>Tendências atuais:</strong>
+                </p>
+                <ul>
+                  {(resultadoRecomendacao.recomendacoes_corte || []).map((corte, idx) => (
+                    <li key={idx}>{corte}</li>
+                  ))}
+                </ul>
+              </>
+            ) : (
+              <p>Carregando recomendação...</p>
+            )}
+          </Modal.Body>
+
+          <Modal.Footer>
+            <Button
+              variant="secondary"
+              onClick={() => setMostrarModalResultado(false)}
+            >
+              Fechar
+            </Button>
+          </Modal.Footer>
+        </Modal>
 
         {/* Modal de Criação */}
         <Modal
@@ -339,6 +473,7 @@ export function Usuarios() {
             </Button>
           </Modal.Footer>
         </Modal>
+        <ToastContainer position="top-right" autoClose={4000} />
       </div>
     </div>
   );

@@ -13,6 +13,7 @@ import UsuarioAPI from "../../services/usuarioAPI";
 import ServicoAPI from "../../services/ServicoAPI";
 import CustomToolbar from "../Toolbar/CustomToolbar";
 import { Form } from "react-bootstrap";
+import { toast } from 'react-toastify';
 
 moment.locale("pt-br");
 const localizer = momentLocalizer(moment);
@@ -119,7 +120,7 @@ export function Calendario() {
         !novoAgendamento.data ||
         !novoAgendamento.status
       ) {
-        alert("Preencha todos os campos antes de criar o agendamento.");
+        toast.error("Preencha todos os campos para criar um agendamento!");
         return;
       }
 
@@ -139,10 +140,10 @@ export function Calendario() {
           usuarioId: "",
           data: "",
           status: "",
-        }); // Reseta o formulário
+        });
       } catch (error) {
         console.error("Erro ao criar agendamento: ", error);
-        alert("A data do agendamento não pode ser inferior a data atual...");
+        toast.error("Data do agendamento não pode ser menor que a atual!")
       }
     };
 
@@ -202,10 +203,10 @@ export function Calendario() {
         );
         await carregarAgendamentos();
         setMostrarModal(false);
-        alert("Agendamento atualizado com sucesso!");
+        toast.success("Agendamento atualizado com sucesso...");
       } catch (error) {
         console.error("Erro ao atualizar agendamento:", error);
-        alert("Erro ao salvar as alterações.");
+        toast.error("Erro ao salvar as alterações.");
       }
     };
 
@@ -279,13 +280,13 @@ export function Calendario() {
             </Form.Group>
             <hr />
             <Form.Group controlId="usuario">
-              <Form.Label>Usuário</Form.Label>
+              <Form.Label>Cliente</Form.Label>
               <Form.Select
                 name="usuarioId"
                 value={novoAgendamento.usuarioId}
                 onChange={handleChange}
               >
-                <option value="">Selecione um usuário</option>
+                <option value="">Selecione um cliente</option>
                 {usuarios.map((usuario) => (
                   <option key={usuario.usuarioId} value={usuario.usuarioId}>
                     {usuario.nome}
@@ -363,7 +364,7 @@ export function Calendario() {
           {dadosEditados && (
             <Form>
               <Form.Group>
-                <Form.Label>Usuário</Form.Label>
+                <Form.Label>Cliente</Form.Label>
                 <Form.Select
                   name="usuarioId"
                   value={dadosEditados.usuarioId}
@@ -377,7 +378,7 @@ export function Calendario() {
                   ))}
                 </Form.Select>
               </Form.Group>
-
+                <hr />
               <Form.Group>
                 <Form.Label>Serviço</Form.Label>
                 <Form.Select
@@ -393,7 +394,7 @@ export function Calendario() {
                   ))}
                 </Form.Select>
               </Form.Group>
-
+                <hr />
               <Form.Group>
                 <Form.Label>Data</Form.Label>
                 <Form.Control
@@ -404,7 +405,7 @@ export function Calendario() {
                   disabled={!modoEdicao}
                 />
               </Form.Group>
-
+                <hr />
               <Form.Group>
                 <Form.Label>Status</Form.Label>
                 <Form.Select
@@ -423,7 +424,6 @@ export function Calendario() {
             </Form>
           )}
         </Modal.Body>
-
         <Modal.Footer>
           {!modoEdicao ? (
             <>
