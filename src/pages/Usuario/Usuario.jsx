@@ -120,17 +120,17 @@ export function Usuarios() {
 
   const handleRecomendacao = async (foto) => {
     if (!foto || !usuarioParaRecomendar) return;
-  
+
     try {
       const resultado = await UsuarioApi.recomendarCorteAsync(
         foto,
         usuarioParaRecomendar.nome
       );
-  
+
       toast.success(
-        `Corte recomendado para ${usuarioParaRecomendar.nome}: ${resultado.corte_recomendado}`
+        `Corte recomendado para ${usuarioParaRecomendar.nome} com sucesso...`
       );
-  
+
       // Novo: salva o resultado para exibir no modal
       setResultadoRecomendacao(resultado);
       setMostrarModalResultado(true);
@@ -143,7 +143,6 @@ export function Usuarios() {
       setUsuarioParaRecomendar(null);
     }
   };
-  
 
   return (
     <div className={style.layout}>
@@ -235,17 +234,20 @@ export function Usuarios() {
 
           <Modal.Footer>
             <Button
-              variant="secondary"
+              className={style.modal_button_cancelar}
               onClick={() => setMostrarModalRecomendar(false)}
             >
               Cancelar
             </Button>
-            <Button variant="primary" onClick={selecionarFotoParaRecomendacao}>
+            <Button
+              className={style.modal_button_salvar}
+              onClick={selecionarFotoParaRecomendacao}
+            >
               Escolher Foto
             </Button>
           </Modal.Footer>
         </Modal>
-          
+
         {/* Modal de Recomendação Resposta */}
         <Modal
           show={mostrarModalResultado}
@@ -271,9 +273,11 @@ export function Usuarios() {
                   <strong>Tendências atuais:</strong>
                 </p>
                 <ul>
-                  {(resultadoRecomendacao.recomendacoes_corte || []).map((corte, idx) => (
-                    <li key={idx}>{corte}</li>
-                  ))}
+                  {(resultadoRecomendacao.recomendacoes_corte || []).map(
+                    (corte, idx) => (
+                      <li key={idx}>{corte}</li>
+                    )
+                  )}
                 </ul>
               </>
             ) : (
@@ -283,7 +287,7 @@ export function Usuarios() {
 
           <Modal.Footer>
             <Button
-              variant="secondary"
+              className={style.modal_button_cancelar}
               onClick={() => setMostrarModalResultado(false)}
             >
               Fechar

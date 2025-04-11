@@ -52,7 +52,7 @@ export function Servicos() {
     if (!servicoSelecionado) return;
 
     try {
-      await ServicoAPI.atualizarAsync(servicoSelecionado.id, {
+      await ServicoAPI.atualizarAsync(servicoSelecionado.servicoId, {
         nome,
         descricao,
         preco: parseFloat(preco),

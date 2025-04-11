@@ -5,7 +5,6 @@ import "../node_modules/bootstrap-icons/font/bootstrap-icons.css";
 import "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Home } from "./pages/Home/Home";
-import { DashboardMain } from "./pages/Dashboard/DashboardMain";
 import { Usuarios } from "./pages/Usuario/Usuario";
 import { AdicionarUsuario } from "./pages/Usuario/AdicionarUsuario/AdicionarUsuario";
 import { Servicos } from "./pages/Servicos/Servico";
@@ -28,14 +27,6 @@ function App() {
             element={
               <PrivateRoute>
                 <Home />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/dashboard"
-            element={
-              <PrivateRoute>
-                <DashboardMain />
               </PrivateRoute>
             }
           />

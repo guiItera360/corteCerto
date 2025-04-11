@@ -36,7 +36,7 @@ const UsuarioAPI = {
 
   async deletarAsync(usuarioId) {
     try {
-      const response = await HTTPClient.delete(`Usuario/Excluir/${usuarioId}`);
+      const response = await HTTPClient.delete(`Usuario/Deletar/${usuarioId}`);
       return response.data;
     } catch (error) {
       console.error(

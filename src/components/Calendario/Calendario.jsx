@@ -165,7 +165,6 @@ export function Calendario() {
 
       try {
         await AgendamentoAPI.atualizarAsync(event.id, agendamentoAtualizado);
-        console.log("Agendamento atualizado com sucesso!");
       } catch (error) {
         console.error("Erro ao atualizar agendamento: ", error);
       }
@@ -194,7 +193,7 @@ export function Calendario() {
           servicoId: parseInt(dadosEditados.servicoId),
           usuarioId: parseInt(dadosEditados.usuarioId),
           data: new Date(dadosEditados.start).toISOString(),
-          status: parseInt(dadosEditados.status),
+          status: parseInt(dadosEditados.statusId),
         };
 
         await AgendamentoAPI.atualizarAsync(
@@ -212,18 +211,18 @@ export function Calendario() {
 
     const handleExcluir = async () => {
       const confirm = window.confirm(
-        "Tem certeza que deseja excluir este agendamento?"
+        "Tem certeza que deseja cancelar este agendamento?"
       );
       if (!confirm) return;
 
       try {
-        await AgendamentoAPI.excluirAsync(eventoSelecionado.id);
+        await AgendamentoAPI.cancelarAsync(eventoSelecionado.id);
         await carregarAgendamentos();
         setMostrarModal(false);
-        alert("Agendamento excluído com sucesso!");
+        toast.success("Agendamento cancelado com sucesso...");
       } catch (error) {
-        console.error("Erro ao excluir agendamento:", error);
-        alert("Erro ao excluir o agendamento.");
+        console.error("Erro ao cancelar agendamento:", error);
+        toast.error("Erro ao cancelar as alterações.");
       }
     };
 
@@ -428,7 +427,7 @@ export function Calendario() {
           {!modoEdicao ? (
             <>
               <Button variant="danger" onClick={handleExcluir}>
-                Excluir
+                Cancelar Agendamento
               </Button>
               <Button variant="primary" onClick={handleEditar}>
                 Editar
@@ -437,7 +436,7 @@ export function Calendario() {
           ) : (
             <>
               <Button variant="secondary" onClick={handleCancelarEdicao}>
-                Cancelar
+                Cancelar Edição
               </Button>
               <Button variant="success" onClick={handleSalvarEdicao}>
                 Salvar
